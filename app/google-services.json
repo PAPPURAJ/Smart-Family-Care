@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "234592541225",
+    "project_id": "smart-family-care",
+    "storage_bucket": "smart-family-care.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:234592541225:android:f4c641a71ccfc080acda38",
+        "android_client_info": {
+          "package_name": "com.blogspot.rajbtc.smartfamilycare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "234592541225-so54bbj6pkgbjau2vo0nesgtd3morm7k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdUPqswTjZ1wUs_ZgrDqkE_8vqe7mtD0k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "234592541225-so54bbj6pkgbjau2vo0nesgtd3morm7k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

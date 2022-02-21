@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+
+
+        <item
+            android:id="@+id/homeMenuId"
+            android:icon="@drawable/home"
+            android:title="Home" />
+        <item
+            android:id="@+id/addMemberMenuId"
+            android:icon="@drawable/addmember"
+            android:title="Add Member" />
+        <item
+            android:id="@+id/memberListMenuId"
+            android:icon="@drawable/memberlist"
+            android:title="Member List" />
+        <item
+            android:id="@+id/howToWorkMenuId"
+            android:icon="@drawable/howtowork"
+            android:title="How to Work" />
+        <item
+            android:id="@+id/privacyAndPolicyMenuId"
+            android:icon="@drawable/privacypolicy"
+            android:title="Privacy &amp; Policy" />
+
+
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/contactUsMenuId"
+                android:icon="@drawable/contactus"
+                android:title="Contact us" />
+            <item
+                android:id="@+id/rateUsMenuId"
+                android:icon="@drawable/rateus"
+                android:title="Rate us" />
+
+        </menu>
+
+
+    </item>
+
+</menu>

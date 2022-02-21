@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.blogspot.rajbtc.smartfamilycare.outdoor.MapActivity;
+
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -25,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ImageView speak = findViewById(R.id.iv_mic);
+
+        startActivity(new Intent(this, MapActivity.class));
 
         t1=new TextToSpeech(getApplicationContext(), status -> {
             if(status != TextToSpeech.ERROR) {
@@ -67,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(this, ""+result.get(0), Toast.LENGTH_SHORT).show();
 
                     t1.speak("You told "+result.get(0), TextToSpeech.QUEUE_FLUSH, null);
-
 
                 }
                 break;
