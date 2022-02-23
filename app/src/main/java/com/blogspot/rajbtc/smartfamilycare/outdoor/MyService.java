@@ -13,14 +13,19 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
 import android.hardware.SensorListener;
 import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
@@ -30,8 +35,15 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 
+import com.blogspot.rajbtc.smartfamilycare.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
 
 public class MyService extends Service implements  LocationListener{
     private NotificationChannel serviceChannel;
@@ -44,6 +56,59 @@ public class MyService extends Service implements  LocationListener{
     private FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
     private String myEmail;
 
+
+    private ArrayList<MemberlistData> mapDataArrayList=new ArrayList<>();
+
+    private SensorManager mSensorManager;
+    private Sensor mAccelerometer;
+    private float sensorSummation;
+
+    private MediaPlayer mediaPlayer;
+
+
+
+    private boolean canAlert=true;
+
+    private Handler handler=new Handler();
+    private Runnable runnable=new Runnable() {
+        @Override
+        public void run() {
+            if(sensorSummation>50)
+                handler.postDelayed(runnable,10000);
+            else{
+                firebaseDatabase.getReference("Users/"+myEmail+"/danger").setValue("0");
+                canAlert=true;
+            }
+        }
+    };
+
+
+    private SensorEventListener sensorEvenListener = new SensorEventListener() {
+
+
+
+
+        @Override
+        public void onSensorChanged(SensorEvent sensorEvent) {
+            float x = sensorEvent.values[0];
+            float y = sensorEvent.values[1];
+            float z = sensorEvent.values[2];
+            sensorSummation=x+y+z;
+
+            if(sensorSummation>50 && canAlert){
+                setDanger();
+            }
+
+
+        }
+
+
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int i) {
+
+        }
+    };
 
 
 
@@ -65,9 +130,16 @@ public class MyService extends Service implements  LocationListener{
     public void onCreate() {
         super.onCreate();
         Log.i(TAG, "====On Create====");
+
+        mediaPlayer=MediaPlayer.create(getApplicationContext(), R.raw.danger_alarm);
+
         myEmail= FirebaseAuth.getInstance().getCurrentUser().getEmail().replace(".","!");
         manager=(LocationManager)getSystemService(LOCATION_SERVICE);
         SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+
+
+        mSensorManager =(SensorManager)getSystemService(SENSOR_SERVICE);
+        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
     }
 
@@ -87,8 +159,9 @@ public class MyService extends Service implements  LocationListener{
 
         startForeground(1, notification);
 
-
-    getLocationUpdates();
+        mSensorManager.registerListener(sensorEvenListener,mAccelerometer,SensorManager.SENSOR_DELAY_NORMAL);
+        getLocationUpdates();
+        loadFirestore();
 
         return START_STICKY;
     }
@@ -152,6 +225,43 @@ public class MyService extends Service implements  LocationListener{
     private void saveLocation(Location location) {
         MapData mapData=new MapData(location.getLatitude(),location.getLongitude());
         firebaseDatabase.getReference("Users/"+myEmail+"/Location").setValue(mapData);
+    }
+
+    private void setDanger(){
+        firebaseDatabase.getReference("Users/"+myEmail+"/danger").setValue("1");
+        handler.postDelayed(runnable,10000);
+    }
+
+    void loadFirestore(){
+        mapDataArrayList.clear();
+        FirebaseFirestore.getInstance().collection("Family").document(myEmail).collection("Member").get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for(int i=0;i<queryDocumentSnapshots.size();i++){
+                        setAlert(queryDocumentSnapshots.getDocuments().get(i).get("ID").toString().replace(".","!"));
+                    }
+                });
+    }
+
+    void setAlert(String email){
+        firebaseDatabase.getReference(email).child("danger").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String val=snapshot.getValue(String.class);
+                if(val==null)
+                    return;
+                if(val.equals("1")){
+                    if(mediaPlayer!=null)
+                        mediaPlayer.stop();
+                    mediaPlayer.start();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 

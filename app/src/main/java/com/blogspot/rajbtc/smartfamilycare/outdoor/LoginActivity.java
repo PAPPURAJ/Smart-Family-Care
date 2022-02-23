@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.blogspot.rajbtc.smartfamilycare.MainActivity;
 import com.blogspot.rajbtc.smartfamilycare.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -51,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onStart();
         FirebaseUser firebaseUser=mAuth.getCurrentUser();
         if(firebaseUser!=null){
-            startActivity(new Intent(getApplicationContext(), MapActivity.class));
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
         }
     }

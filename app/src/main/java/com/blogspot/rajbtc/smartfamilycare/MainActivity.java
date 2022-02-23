@@ -12,6 +12,11 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.blogspot.rajbtc.smartfamilycare.outdoor.MapActivity;
+import com.blogspot.rajbtc.smartfamilycare.outdoor.MapData;
+import com.blogspot.rajbtc.smartfamilycare.outdoor.MemberlistData;
+import com.blogspot.rajbtc.smartfamilycare.outdoor.MyService;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -20,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     private final int REQ_CODE = 100;
     private TextToSpeech t1;
+    private String myEmail;
 
 
     @Override
@@ -28,7 +34,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ImageView speak = findViewById(R.id.iv_mic);
 
-        startActivity(new Intent(this, MapActivity.class));
+
+
+      //  startActivity(new Intent(this, MapActivity.class));
 
         t1=new TextToSpeech(getApplicationContext(), status -> {
             if(status != TextToSpeech.ERROR) {
@@ -55,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        startService(new Intent(this, MyService.class));
+
 
     }
 
@@ -77,4 +87,14 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+    public void familyProtectorClick(View view) {
+        startActivity(new Intent(this,MapActivity.class));
+    }
+
+    public void crippleCareClick(View view) {
+        //startActivity(new Intent(this,));
+    }
+
+
 }
