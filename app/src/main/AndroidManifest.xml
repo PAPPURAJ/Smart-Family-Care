@@ -20,8 +20,20 @@
 
 
         <activity
+            android:name=".cripple.CrippleActivity"
+            android:exported="true"/>
+
+        <activity
             android:name=".outdoor.MapActivity"
             android:exported="true"/>
+
+
+
+        <activity
+            android:name=".outdoor.MemberListActivity"
+            android:exported="true"/>
+
+
 
         <activity
             android:name=".outdoor.LoginActivity"
@@ -38,7 +50,7 @@
 
 
 
-        <service android:name=".outdoor.MyService"/>
+        <service android:name=".MyService"/>
 
         <activity
             android:name=".MainActivity"

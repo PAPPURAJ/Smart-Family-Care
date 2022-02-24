@@ -22,6 +22,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.blogspot.rajbtc.smartfamilycare.MyService;
 import com.blogspot.rajbtc.smartfamilycare.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -122,7 +123,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             if(grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
                 Toast.makeText(this,"Permission Granted!",Toast.LENGTH_SHORT).show();
 
-                startService(new Intent(this,MyService.class));
+                startService(new Intent(this, MyService.class));
             }else{
                 Toast.makeText(this,"Permission Denied!",Toast.LENGTH_SHORT).show();
                 finish();

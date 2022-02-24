@@ -1,23 +1,22 @@
 package com.blogspot.rajbtc.smartfamilycare;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.speech.RecognizerIntent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.blogspot.rajbtc.smartfamilycare.cripple.CrippleActivity;
 import com.blogspot.rajbtc.smartfamilycare.outdoor.MapActivity;
-import com.blogspot.rajbtc.smartfamilycare.outdoor.MapData;
-import com.blogspot.rajbtc.smartfamilycare.outdoor.MemberlistData;
-import com.blogspot.rajbtc.smartfamilycare.outdoor.MyService;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -71,6 +70,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId()==R.id.menu_logOut){
+            FirebaseAuth.getInstance().signOut();
+            Toast.makeText(getApplicationContext(),"Signed out!",Toast.LENGTH_SHORT).show();
+            stopService(new Intent(this,MyService.class));
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
+
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -95,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void crippleCareClick(View view) {
-        //startActivity(new Intent(this,));
+        startActivity(new Intent(this, CrippleActivity.class));
     }
 
 
