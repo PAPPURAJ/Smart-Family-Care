@@ -52,7 +52,6 @@ public class MyService extends Service implements  LocationListener{
     private final int MIN_TIME=10000;
     private final int MIN_DISTANCE=3;
     private LocationManager manager;
-    private Context context;
     private FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
     private String myEmail;
 
@@ -131,7 +130,7 @@ public class MyService extends Service implements  LocationListener{
         super.onCreate();
         Log.i(TAG, "====On Create====");
 
-        mediaPlayer=MediaPlayer.create(getApplicationContext(), R.raw.danger_alarm);
+        mediaPlayer=MediaPlayer.create(this,R.raw.danger_alarm);
 
         myEmail= FirebaseAuth.getInstance().getCurrentUser().getEmail().replace(".","!");
         manager=(LocationManager)getSystemService(LOCATION_SERVICE);
@@ -234,25 +233,27 @@ public class MyService extends Service implements  LocationListener{
 
     void loadFirestore(){
         mapDataArrayList.clear();
+        mediaPlayer=MediaPlayer.create(getApplicationContext(),R.raw.danger_alarm);
         FirebaseFirestore.getInstance().collection("Family").document(myEmail).collection("Member").get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     for(int i=0;i<queryDocumentSnapshots.size();i++){
-                        setAlert(queryDocumentSnapshots.getDocuments().get(i).get("ID").toString().replace(".","!"));
+                        setAlert(queryDocumentSnapshots.getDocuments().get(i).get("ID").toString());
                     }
                 });
     }
 
     void setAlert(String email){
-        firebaseDatabase.getReference(email).child("danger").addValueEventListener(new ValueEventListener() {
+        firebaseDatabase.getReference("Users").child(email).child("danger").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String val=snapshot.getValue(String.class);
                 if(val==null)
                     return;
+
+                Log.e(TAG,"==========Email: "+email+"   Value: "+val);
                 if(val.equals("1")){
-                    if(mediaPlayer!=null)
-                        mediaPlayer.stop();
-                    mediaPlayer.start();
+                    if(!mediaPlayer.isPlaying())
+                            mediaPlayer.start();
                 }
 
             }

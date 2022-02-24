@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.speech.RecognizerIntent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ImageView speak = findViewById(R.id.iv_mic);
+
 
 
 
