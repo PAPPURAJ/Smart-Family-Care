@@ -4,11 +4,16 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/addmember.xml" value="0.225" />
+        <entry key="app/src/main/res/layout/activity_add_cripple_person_details.xml" value="0.19882246376811594" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.21195652173913043" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_map.xml" value="0.340625" />
+        <entry key="app/src/main/res/layout/activity_member_list.xml" value="0.340625" />
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.21195652173913043" />
+        <entry key="app/src/main/res/layout/cripple_lab_main.xml" value="0.19882246376811594" />
         <entry key="app/src/main/res/layout/cripple_main.xml" value="0.16109422492401215" />
+        <entry key="app/src/main/res/layout/single_memberlist.xml" value="0.340625" />
+        <entry key="app/src/main/res/layout/singleview.xml" value="0.340625" />
         <entry key="app/src/main/res/menu/header_menu.xml" value="0.27708333333333335" />
       </map>
     </option>

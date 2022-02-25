@@ -24,7 +24,7 @@ public class CrippleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.cripple_lab_main);
         notificationTv=findViewById(R.id.notiTv);
 
       //  checkCripple();

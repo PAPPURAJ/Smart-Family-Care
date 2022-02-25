@@ -259,6 +259,7 @@ public class MyService extends Service implements  LocationListener{
                 if(val.equals("1")){
                     if(!mediaPlayer.isPlaying())
                             mediaPlayer.start();
+                    createPushNotification("Safety information",email.replace("!",".")+" is in danger! Please help");
                 }
 
             }
@@ -283,28 +284,31 @@ public class MyService extends Service implements  LocationListener{
                 if(alertPlayer!=null)
                     alertPlayer.stop();
 
+                String notice="";
+
                 switch (value){
                     case "1":
-                        //notificationTv.setText("আমার খিদে পেয়েছে");
+                        notice="Patient need food!";
                         alertPlayer=MediaPlayer.create(getApplicationContext(),R.raw.food);
                         break;
                     case "2":
-                       // notificationTv.setText("আমার ওষুধ প্রয়োজন");
+                        notice="Patient need medicine!";
                         alertPlayer=MediaPlayer.create(getApplicationContext(),R.raw.medicine);
                         break;
                     case "3":
-                      //  notificationTv.setText("আমার ওয়াশরুমে যাওয়া প্রয়োজন");
+                        notice="Patient need to washroom";
                         alertPlayer=MediaPlayer.create(getApplicationContext(),R.raw.washroom);
                         break;
                     case "4":
-                      //  notificationTv.setText("আমার দ্রুত সাহায্য প্রয়োজন");
+                        notice="Patient need someone emergency!";
                         alertPlayer=MediaPlayer.create(getApplicationContext(),R.raw.emergency);
                         break;
                     default:
-                        //notificationTv.setText("আমার খেয়াল রাখবেন");
+                        notice="Patient is is in normal condition!";
                         return;
 
                 }alertPlayer.start();
+                createPushNotification("Patient information",notice);
             }
 
             @Override
@@ -312,6 +316,44 @@ public class MyService extends Service implements  LocationListener{
 
             }
         });
+
+    }
+
+
+
+    private void createPushNotification(String title,String text) {
+        int NOTIFICATION_ID = 234;
+        NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            String CHANNEL_ID = "my_channel_01";
+            CharSequence name = "my_channel";
+            String Description = "This is my channel";
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
+            mChannel.setDescription(Description);
+            mChannel.enableLights(true);
+            mChannel.setLightColor(Color.RED);
+            mChannel.enableVibration(true);
+            mChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+            mChannel.setShowBadge(false);
+            notificationManager.createNotificationChannel(mChannel);
+        }
+
+        Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
+                .setSmallIcon(R.drawable.cripple)
+                .setContentTitle(title)
+                .setContentText(text)
+                .setSound(soundUri);
+
+        Intent resultIntent = new Intent(getApplicationContext(), MainActivity.class);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(getApplicationContext());
+        stackBuilder.addParentStack(MainActivity.class);
+        stackBuilder.addNextIntent(resultIntent);
+        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+        builder.setContentIntent(resultPendingIntent);
+        notificationManager.notify(NOTIFICATION_ID, builder.build());
 
     }
 

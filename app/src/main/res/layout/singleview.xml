@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="2dp"
+    app:cardUseCompatPadding="true"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Misses Rahima"
+            android:textColor="#f11134"
+            android:textSize="40dp"
+            android:layout_below="@+id/bg1"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:id="@+id/blood"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Blood Group: o(+)ve"
+            android:textSize="20dp"
+            android:textColor="#000"/>
+        <TextView
+            android:id="@+id/bp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Disease Names: Sugar,Blood Pressure"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="#000"
+            android:layout_below="@+id/name" />
+
+        <TextView
+            android:id="@+id/bs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Description : This patient take abc 20mg tablet for blood sugar and fgh 5mg for Blood Pressure."
+            android:textSize="20dp"
+            android:layout_weight="1"
+            android:textColor="#000"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@+id/blood" />
+        <TextView
+            android:id="@+id/num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Phone Number(Doctor):01911111111"
+            android:textSize="20dp"
+            android:textColor="#000"
+            android:layout_below="@+id/bp"
+            android:layout_marginLeft="10dp"/>
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

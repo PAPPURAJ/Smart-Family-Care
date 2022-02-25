@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AddCripplePersonDetails">
+    <TextView android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:textStyle="bold"
+        android:textColor="#000"
+        android:textSize="35dp"
+        android:text="Register Cripple Person\n"
+        android:layout_marginTop="20dp"/>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        app:boxStrokeColor="#000"
+        android:layout_margin="10dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:textSize="20dp"
+        android:inputType="text"
+        android:textAllCaps="false"
+        android:hint="Cripple Person Name"
+        android:id="@+id/UserName"/>
+
+</com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        app:boxStrokeColor="#000"
+        android:layout_weight="2"
+        android:layout_margin="0dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:textSize="25dp"
+        android:textAllCaps="false"
+        android:text="\t\tBlood Group :"
+        android:layout_marginLeft="20dp"
+        android:id="@+id/blg"/>
+
+
+</com.google.android.material.textfield.TextInputLayout>
+        <Spinner
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:inputType="text"
+            android:layout_gravity="center"
+            android:textAllCaps="false"
+            android:layout_weight="3"
+            android:id="@+id/bloodGroup"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        app:boxStrokeColor="#000"
+        android:layout_margin="10dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_weight="2">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:textSize="20dp"
+        android:inputType="textEmailAddress"
+        android:textAllCaps="false"
+        android:hint="Code"
+        android:id="@+id/code"/>
+
+</com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        app:boxStrokeColor="#000"
+        android:layout_margin="10dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_weight="1">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:textSize="20dp"
+        android:inputType="textEmailAddress"
+        android:textAllCaps="false"
+        android:hint="Mobile No."
+        android:id="@+id/mobile"/>
+
+</com.google.android.material.textfield.TextInputLayout>
+
+</LinearLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:layout_marginBottom="10dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+    <EditText android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:textSize="20dp"
+        android:inputType="text"
+        android:textAllCaps="false"
+        android:hint="DiseaseName"
+        android:id="@+id/disease1"/>
+
+</com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="136dp"
+        android:layout_margin="10dp">
+
+        <EditText
+            android:id="@+id/disease2"
+            android:layout_width="match_parent"
+            android:layout_height="93dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
+            android:hint="Description"
+            android:inputType="text"
+            android:textAllCaps="false"
+            android:textSize="20dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:background="#f1392f"
+        android:elevation="10dp"
+        android:text="Add"
+        android:onClick="add"
+        android:textAllCaps="true"
+        android:textColor="#fff"
+        android:textSize="20dp" />
+
+
+</LinearLayout>

@@ -7,7 +7,13 @@
     android:layout_gravity="center"
     tools:context=".MainActivity">
 
-
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.3"
+        android:scaleType="fitXY"
+        android:rotation="180"
+        android:src="@drawable/lay_back"/>
     <androidx.cardview.widget.CardView
         android:layout_gravity="center"
         android:layout_width="wrap_content"

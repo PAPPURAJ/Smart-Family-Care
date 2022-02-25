@@ -26,12 +26,26 @@
         <activity
             android:name=".outdoor.MapActivity"
             android:exported="true"/>
+        <activity
+            android:name=".cripple.CrippleLabActivity"
+            android:exported="true"/>
 
 
 
         <activity
             android:name=".outdoor.MemberListActivity"
             android:exported="true"/>
+
+        <activity
+            android:name=".cripple.CripplePersonList"
+            android:exported="true"/>
+
+
+
+        <activity
+            android:name=".cripple.AddCripplePersonDetails"
+            android:exported="true"/>
+
 
 
 

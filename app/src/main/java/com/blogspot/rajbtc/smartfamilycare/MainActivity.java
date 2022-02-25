@@ -15,8 +15,14 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.blogspot.rajbtc.smartfamilycare.cripple.CrippleActivity;
+import com.blogspot.rajbtc.smartfamilycare.cripple.CrippleLabActivity;
+import com.blogspot.rajbtc.smartfamilycare.cripple.CripplePersonList;
 import com.blogspot.rajbtc.smartfamilycare.outdoor.MapActivity;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -26,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
     private final int REQ_CODE = 100;
     private TextToSpeech t1;
     private String myEmail;
+    private FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+
+    private String temperature="null", signal="null";
 
 
     @Override
@@ -37,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+        loadCrippleData();
       //  startActivity(new Intent(this, MapActivity.class));
 
         t1=new TextToSpeech(getApplicationContext(), status -> {
@@ -65,6 +76,58 @@ public class MainActivity extends AppCompatActivity {
         });
 
         startService(new Intent(this, MyService.class));
+
+
+    }
+
+    void loadCrippleData(){
+        firebaseDatabase.getReference("CrippleCare")
+                .child("tempareture").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String str=snapshot.getValue(String.class);
+                if(str!=null)
+                    temperature=str;
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        firebaseDatabase.getReference("CrippleCare")
+                .child("signal").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String str=snapshot.getValue(String.class);
+                if(str!=null)
+                    switch (str){
+                        case "1":
+                            signal="Patient need food!";
+                            break;
+                        case "2":
+                            signal="Patient need medicine!";
+                            break;
+                        case "3":
+                            signal="Patient need to go washroom!";
+                            break;
+                        case "4":
+                            signal="Patient need someone emergency!";
+                            break;
+                        default:
+                            signal="Patient is in normal condition!";
+
+                    }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
 
     }
@@ -100,8 +163,12 @@ public class MainActivity extends AppCompatActivity {
                             .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     Toast.makeText(this, ""+result.get(0), Toast.LENGTH_SHORT).show();
 
-                    t1.speak("You told "+result.get(0), TextToSpeech.QUEUE_FLUSH, null);
 
+                    String voiceInput=result.get(0);
+                    if(voiceInput.contains("temperature"))
+                        t1.speak("The temperature of the patient is "+temperature+" degree celsius", TextToSpeech.QUEUE_FLUSH, null);
+                    else if(voiceInput.contains("patient") || voiceInput.contains("about"))
+                        t1.speak(signal, TextToSpeech.QUEUE_FLUSH, null);
                 }
                 break;
             }
@@ -113,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void crippleCareClick(View view) {
-        startActivity(new Intent(this, CrippleActivity.class));
+        startActivity(new Intent(this, CrippleLabActivity.class));
     }
 
 
