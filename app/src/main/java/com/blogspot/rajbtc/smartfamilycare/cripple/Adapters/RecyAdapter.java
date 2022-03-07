@@ -33,11 +33,10 @@ public class RecyAdapter extends RecyclerView.Adapter<RecyAdapter.MyHolder> {
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
         holder.nameTv.setText(arrayList.get(position).getName());
-        holder.bloodTv.setText(arrayList.get(position).getBg());
-        holder.bpTv.setText(arrayList.get(position).getBp());
-        holder.bsTv.setText(arrayList.get(position).getBs());
-        holder.numTv.setText(arrayList.get(position).getNum());
-        holder.nameTv.setText(arrayList.get(position).getName());
+        holder.bloodTv.setText("Blood group: "+arrayList.get(position).getBg());
+        holder.bpTv.setText("Blood disease: "+arrayList.get(position).getBs());
+        holder.bsTv.setText("Blood sugar: "+arrayList.get(position).getBs());
+        holder.numTv.setText("Mobile: "+arrayList.get(position).getNum());
     }
 
     @Override

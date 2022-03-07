@@ -60,7 +60,6 @@ public class AddCripplePersonDetails extends AppCompatActivity implements Adapte
             {
                 Toast.makeText(getApplicationContext(), "Please input first", Toast.LENGTH_SHORT).show();
 
-
                 return;
 
             }

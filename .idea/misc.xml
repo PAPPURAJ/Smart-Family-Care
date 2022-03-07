@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/drawable/addmember.xml" value="0.225" />
         <entry key="app/src/main/res/layout/activity_add_cripple_person_details.xml" value="0.19882246376811594" />
+        <entry key="app/src/main/res/layout/activity_cripple_person_list.xml" value="0.17401215805471124" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.21195652173913043" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_map.xml" value="0.340625" />

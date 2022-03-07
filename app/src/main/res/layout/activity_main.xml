@@ -51,7 +51,7 @@
                 <ImageView
                     android:layout_width="67dp"
                     android:layout_height="66dp"
-                    android:src="@drawable/cripple" />
+                    android:src="@drawable/cripp" />
                 <TextView
                     android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
